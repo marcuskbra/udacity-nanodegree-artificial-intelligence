@@ -1,15 +1,12 @@
-
 from utils import *
-
 
 row_units = [cross(r, cols) for r in rows]
 column_units = [cross(rows, c) for c in cols]
-square_units = [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')]
+square_units = [cross(rs, cs) for rs in ('ABC', 'DEF', 'GHI') for cs in ('123', '456', '789')]
 unitlist = row_units + column_units + square_units
 
 # TODO: Update the unit list to add the new diagonal units
 unitlist = unitlist
-
 
 # Must be called after all units (including diagonals) are added to the unitlist
 units = extract_units(unitlist, boxes)
@@ -170,9 +167,10 @@ if __name__ == "__main__":
 
     try:
         import PySudoku
+
         PySudoku.play(grid2values(diag_sudoku_grid), result, history)
 
     except SystemExit:
         pass
-    except:
+    except Exception:
         print('We could not visualize your board due to a pygame issue. Not a problem! It is not a requirement.')
