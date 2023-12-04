@@ -51,8 +51,26 @@ def naked_twins(values):
     Pseudocode for this algorithm on github:
     https://github.com/udacity/artificial-intelligence/blob/master/Projects/1_Sudoku/pseudocode.md
     """
-    # TODO: Implement this function!
-    raise NotImplementedError
+    # make a deep copy
+    out = values.copy()
+
+    # for each boxA in values do
+    for boxA in values:
+        if len(values[boxA]) != 2:
+            # we only care about boxes with exactly two values
+            continue
+
+        # for each boxB of PEERS(boxA) do
+        for boxB in peers[boxA]:
+            # if both values[boxA] and values[boxB] exactly match and have only two feasible digits do
+            if values[boxA] == values[boxB] and len(values[boxB]) == 2:
+                # for each peer of INTERSECTION(PEERS(boxA), PEERS(boxB)) do
+                for peer in set.intersection(peers[boxA], peers[boxB]):
+                    # for each digit of values[boxA] do
+                    for digit in values[boxA]:
+                        # remove digit d from out[peer]
+                        out[peer] = out[peer].replace(digit, '')
+    return out
 
 
 def eliminate(values):
@@ -131,6 +149,9 @@ def reduce_puzzle(values):
 
         # Your code here: Use the Only Choice Strategy
         values = only_choice(values)
+
+        # Use the Naked Twins Strategy
+        values = naked_twins(values)
 
         # Check how many boxes have a determined value, to compare
         solved_values_after = len([box for box in values.keys() if len(values[box]) == 1])
