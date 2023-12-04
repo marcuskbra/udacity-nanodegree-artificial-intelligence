@@ -1,6 +1,4 @@
-
 from collections import defaultdict
-
 
 rows = 'ABCDEFGHI'
 cols = '123456789'
@@ -91,9 +89,10 @@ def assign_value(values, box, value):
         history[values2grid(values)] = (prev, (box, value))
     return values
 
+
 def cross(A, B):
     """Cross product of elements in A and elements in B """
-    return [x+y for x in A for y in B]
+    return [x + y for x in A for y in B]
 
 
 def values2grid(values):
@@ -135,13 +134,10 @@ def grid2values(grid):
             Values: The value in each box, e.g., '8'. If the box has no value,
             then the value will be '123456789'.
     """
-    sudoku_grid = {}
-    for val, key in zip(grid, boxes):
-        if val == '.':
-            sudoku_grid[key] = '123456789'
-        else:
-            sudoku_grid[key] = val
-    return sudoku_grid
+    return {
+        key: '123456789' if val == '.' else val
+        for val, key in zip(grid, boxes)
+    }
 
 
 def display(values):
@@ -151,10 +147,10 @@ def display(values):
     ----------
         values(dict): The sudoku in dictionary form
     """
-    width = 1+max(len(values[s]) for s in boxes)
-    line = '+'.join(['-'*(width*3)]*3)
+    width = 1 + max(len(values[s]) for s in boxes)
+    line = '+'.join(['-' * (width * 3)] * 3)
     for r in rows:
-        print(''.join(values[r+c].center(width)+('|' if c in '36' else '')
+        print(''.join(values[r + c].center(width) + ('|' if c in '36' else '')
                       for c in cols))
         if r in 'CF': print(line)
     print()
