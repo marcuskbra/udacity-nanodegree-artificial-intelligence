@@ -1,6 +1,6 @@
 import unittest
 
-from utils import diagonal, reverse_diagonal
+from solution import diagonal, reverse_diagonal
 
 
 class TestDiagonal(unittest.TestCase):

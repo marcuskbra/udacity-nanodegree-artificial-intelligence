@@ -1,4 +1,34 @@
+import itertools
+from typing import List
+
 from utils import *
+
+
+def diagonal(_rows: List[str], _cols: List[str]) -> List[str]:
+    """
+    Diagonal concatenation of elements in Rows and elements in Cols
+    For example: Rows = [A,B,C] and Cols = [1,2,3], should return [A1,B2,C3]
+    """
+    assert len(_rows) == len(_cols)
+    return [
+        _rows[i] + _cols[j]
+        for i, j in itertools.product(range(len(_rows)), range(len(_cols)))
+        if i == j
+    ]
+
+
+def reverse_diagonal(_rows: List[str], _cols: List[str]) -> List[str]:
+    """
+    Reverse diagonal concatenation of elements in Rows and elements in Cols
+    For example: Rows = [A,B,C] and Cols = [1,2,3], should return [A3,B2,C1]
+    """
+    assert len(_rows) == len(_cols)
+    return [
+        rows[i] + _cols[j]
+        for i, j in itertools.product(range(len(_rows)), range(len(_cols)))
+        if i + j == len(_rows) - 1
+    ]
+
 
 row_units = [cross(r, cols) for r in rows]
 column_units = [cross(rows, c) for c in cols]

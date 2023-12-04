@@ -1,11 +1,8 @@
-import itertools
 from collections import defaultdict
-
-from typing import List
 
 rows: str = 'ABCDEFGHI'
 cols: str = '123456789'
-boxes: List[str] = [r + c for r in rows for c in cols]
+boxes = [r + c for r in rows for c in cols]
 history = {}  # history must be declared here so that it exists in the assign_values scope
 
 
@@ -96,32 +93,6 @@ def assign_value(values, box, value):
 def cross(A, B):
     """Cross product of elements in A and elements in B """
     return [x + y for x in A for y in B]
-
-
-def diagonal(_rows: List[str], _cols: List[str]) -> List[str]:
-    """
-    Diagonal concatenation of elements in Rows and elements in Cols
-    For example: Rows = [A,B,C] and Cols = [1,2,3], should return [A1,B2,C3]
-    """
-    assert len(_rows) == len(_cols)
-    return [
-        _rows[i] + _cols[j]
-        for i, j in itertools.product(range(len(_rows)), range(len(_cols)))
-        if i == j
-    ]
-
-
-def reverse_diagonal(_rows: List[str], _cols: List[str]) -> List[str]:
-    """
-    Reverse diagonal concatenation of elements in Rows and elements in Cols
-    For example: Rows = [A,B,C] and Cols = [1,2,3], should return [A3,B2,C1]
-    """
-    assert len(_rows) == len(_cols)
-    return [
-        rows[i] + _cols[j]
-        for i, j in itertools.product(range(len(_rows)), range(len(_cols)))
-        if i + j == len(_rows) - 1
-    ]
 
 
 def values2grid(values):
